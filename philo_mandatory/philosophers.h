@@ -16,7 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-#include <pthread.h>
+# include <pthread.h>
+#include <time.h>
 
 void    ft_putstr_fd(char *s, int fd);
 int     ft_atoi(const char *str);
