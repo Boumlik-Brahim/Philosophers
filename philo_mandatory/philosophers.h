@@ -19,10 +19,20 @@
 # include <pthread.h>
 #include <time.h>
 
+typedef struct s_data
+{
+    int nbr_philosophers;
+    int time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
+    int *philo_index;
+    int fork_index;
+    pthread_mutex_t fork_Mutex;
+}   t_data;
+
 void    ft_putstr_fd(char *s, int fd);
 int     ft_atoi(const char *str);
 void	ft_handle_error(char *str);
-
 
 
 #endif

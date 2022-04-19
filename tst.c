@@ -17,7 +17,6 @@
 //     int i;
 //     int *result;
 //     result = malloc(sizeof(int));
-
 //     i = 0;
 //     while(i <= 100)
 //     {
@@ -36,7 +35,6 @@
 //     int index;
 //     int sum;
 //     int i;
-
 //     index = *(int*)arg;
 //     sum = 0;
 //     i = 0;
@@ -109,36 +107,110 @@ void *car(void *arg)
     pthread_mutex_unlock(&mutexFuel);
 }
 
+// int main(int ac, char *av[])
+// {
+//    pthread_t    t[10];
+//    int          i;
+
+//    pthread_mutex_init(&mutexFuel, NULL);
+//    pthread_cond_init(&condFuel, NULL);
+//    i = 0;
+//    while(i < 5)
+//    {
+//        if (i == 4)
+//        {
+//            if(pthread_create(&t[i], NULL, &fuel_filling, NULL) != 0)
+//                 ft_handle_error("THREAD ERROR");
+//        }
+//        else
+//        {
+//            if(pthread_create(&t[i], NULL, &car, NULL) != 0)
+//                 ft_handle_error("THREAD ERROR");
+//        }
+//        i++;
+//    }
+//    i = 0;
+//    while(i < 5)
+//    {
+//        if (pthread_join(t[i], NULL) != 0)
+//             ft_handle_error("JOIN THREAD ERROR");
+//        i++;
+//    }
+//    pthread_mutex_destroy(&mutexFuel);
+//    pthread_cond_destroy(&condFuel);
+//    return 0;
+// }
+
+// condition variables
+
+pthread_mutex_t stoveMutex[4];
+int stoveFuel[4] = { 100, 100, 100, 100};
+
+void *routine(void *arg)
+{
+    int i;
+    i = 0;
+    int fuelNeeded;
+
+    while(i++ < 4)
+    {
+        if(pthread_mutex_trylock(&stoveMutex[i]) == 0)
+        {
+            fuelNeeded = (rand() % 30);
+            if (stoveFuel[i] - fuelNeeded < 0)
+                printf("No more fuel... going  home\n");
+            else
+            {
+                stoveFuel[i] -= fuelNeeded;
+                usleep(500000);
+                printf("Fuel left %d\n", stoveFuel[i]);
+            }
+            pthread_mutex_unlock(&stoveMutex[i]);
+            break ;
+        }
+        else
+        {
+            if (i == 3)
+            {
+                printf("No stove available yet, waiting...\n");
+                usleep(300000);
+                i = 0;
+            }
+        }
+    }
+}
+
 int main(int ac, char *av[])
 {
-   pthread_t    t[5];
+    srand(time(NULL));
+   pthread_t    t[10];
    int          i;
 
-   pthread_mutex_init(&mutexFuel, NULL);
-   pthread_cond_init(&condFuel, NULL);
    i = 0;
-   while(i < 5)
+   while(i < 4)
    {
-       if (i == 4)
-       {
-           if(pthread_create(&t[i], NULL, &fuel_filling, NULL) != 0)
-                ft_handle_error("THREAD ERROR");
-       }
-       else
-       {
-           if(pthread_create(&t[i], NULL, &car, NULL) != 0)
-                ft_handle_error("THREAD ERROR");
-       }
+       pthread_mutex_init(&stoveMutex[i], NULL);
        i++;
    }
    i = 0;
-   while(i < 5)
+   while(i < 10)
+   {
+        if(pthread_create(&t[i], NULL, &routine, NULL) != 0)
+            ft_handle_error("THREAD ERROR");
+       i++;
+   }
+   i = 0;
+   while(i < 10)
    {
        if (pthread_join(t[i], NULL) != 0)
             ft_handle_error("JOIN THREAD ERROR");
        i++;
    }
-   pthread_mutex_destroy(&mutexFuel);
-   pthread_cond_destroy(&condFuel);
+   i = 0;
+   while(i < 4)
+   {
+       pthread_mutex_destroy(&stoveMutex[i]);
+       i++;
+   }
    return 0;
 }
