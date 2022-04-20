@@ -25,9 +25,10 @@ typedef struct s_data
     int time_to_die;
     int time_to_eat;
     int time_to_sleep;
-    int *philo_index;
-    int fork_index;
-    pthread_mutex_t fork_Mutex;
+    int nmbroftm_each_philo_eat;
+
+    pthread_t *threads;
+    pthread_mutex_t *fork_Mutex;
 }   t_data;
 
 void    ft_putstr_fd(char *s, int fd);

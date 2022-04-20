@@ -143,6 +143,33 @@ void *car(void *arg)
 
 // condition variables
 
+// typedef struct s_philo
+// {
+// 	int	id;
+// 	int	left_fork;
+// 	int right_fork;
+// 	pthread_t thread_id;
+// 	long long	last_eat;
+// 	struct s_data *data;
+// }t_philo;
+
+// typedef struct s_data
+// {
+// 	int	nbr_philo;
+// 	int	tt_die;
+// 	int	tt_eat;
+// 	int	tt_sleep;
+// 	int	n_eat;
+// 	int eating_counter;
+// 	int	dieded;
+// 	int	all_eat;
+// 	long long first_time;
+// 	pthread_mutex_t fork_mutex[210];
+// 	pthread_mutex_t writing_mutex;
+// 	pthread_mutex_t eating_mutex;
+// 	t_philo philo[210];
+// }t_data;
+
 pthread_mutex_t stoveMutex[4];
 int stoveFuel[4] = { 100, 100, 100, 100};
 

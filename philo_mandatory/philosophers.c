@@ -12,73 +12,89 @@
 
 #include "philosophers.h"
 
-void ft_take_fork(t_data *data)
+void ft_take_right_forks(t_data *data,int i)
 {
-    pthread_mutex_lock(&data->fork_Mutex);
+    pthread_mutex_lock(&data->fork_Mutex[i]);
 }
 
-void ft_put_fork(t_data *data)
+void ft_put_right_forks(t_data *data,int i)
 {
-    pthread_mutex_unlock(&data->fork_Mutex);
+    pthread_mutex_unlock(&data->fork_Mutex[i]);
 }
 
-void ft_eat(t_data *data)
+void ft_take_left_forks(t_data *data,int i)
 {
-    ft_take_fork(data);
-    printf("philosopher is eaten\n");
-    usleep(data->time_to_eat);
-    ft_put_fork(data);
+    pthread_mutex_lock(&data->fork_Mutex[i]);
 }
+
+void ft_put_left__forks(t_data *data,int i)
+{
+    pthread_mutex_unlock(&data->fork_Mutex[i]);
+}
+
+// void ft_eat(t_data *data)
+// {
+    
+// }
 
 void *routine(void *arg)
-{       
-	t_data *data;
-
-	data = (t_data *)arg;
-    ft_eat(data);
+{
+    t_data *data;
+    data = (t_data *)arg;
+    int i;
+    i = 0;
+    while(i++ < data->nbr_philosophers)
+    {
+        pthread_mutex_lock(&data->fork_Mutex[i]);
+        printf("philo nbr %d wants to eat\n",i);     
+        usleep(500000);
+        pthread_mutex_unlock(&data->fork_Mutex[i]);       
+    }
     return 0;
 }
 
 int main(int ac, char **av)
 {
-    t_data  data;
+    t_data  *data;
     int     i;
 
+    data = (t_data*)malloc(sizeof(t_data));
     i = ac;
-    data.nbr_philosophers = ft_atoi(av[1]);
-    data.time_to_die = ft_atoi(av[2]);
-    data.time_to_eat = ft_atoi(av[3]);
-    data.time_to_sleep = ft_atoi(av[4]);
 
-    pthread_t t[data.nbr_philosophers];
-    // pthread_mutex_t fork_Mutex[data.nbr_philosophers];
-    // i = 0;
-    // while(i < data.nbr_philosophers)
-    // {
-    //     pthread_mutex_init(&fork_Mutex[i], NULL);
-    //     i++;
-    // }
-    pthread_mutex_init(&data.fork_Mutex, NULL);
+    data->nbr_philosophers = ft_atoi(av[1]);
+    data->time_to_die = ft_atoi(av[2]);
+    data->time_to_eat = ft_atoi(av[3]);
+    data->time_to_sleep = ft_atoi(av[4]);
+    data->nmbroftm_each_philo_eat = ft_atoi(av[5]);
+
+    data->threads =  malloc(sizeof(pthread_t) * data->nbr_philosophers);
+    data->fork_Mutex =  malloc(sizeof(pthread_mutex_t) * data->nbr_philosophers);
+
     i = 0;
-    while(i < data.nbr_philosophers)
+    while(i < data->nbr_philosophers)
     {
-        if (pthread_create(&t[i], NULL, &routine, (void *)&data) != 0)
+        pthread_mutex_init(&data->fork_Mutex[i], NULL);
+        i++;
+    }
+    i = 0;
+    while(i < data->nbr_philosophers)
+    {
+        if (pthread_create(&data->threads[i], NULL, &routine, (void*)data) != 0)
             ft_handle_error("THREAD ERROR");
         i++;
     }
     i = 0;
-    while(i < data.nbr_philosophers)
+    while(i < data->nbr_philosophers)
     {
-        if (pthread_join(t[i], NULL) != 0)
+        if (pthread_join(data->threads[i], NULL) != 0)
             ft_handle_error("THREAD ERROR");
         i++;
     }
-    pthread_mutex_destroy(&data.fork_Mutex);
-    // i = 0;
-    // while(i < data.nbr_philosophers)
-    // {
-    //     pthread_mutex_destroy(&fork_Mutex[i]);
-    //     i++;
-    // }
+    i = 0;
+    while(i < data->nbr_philosophers)
+    {
+        pthread_mutex_destroy(&data->fork_Mutex[i]);
+        i++;
+    }
     return (0);
 }
