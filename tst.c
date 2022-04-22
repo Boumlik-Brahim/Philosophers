@@ -241,3 +241,46 @@ int main(int ac, char *av[])
    }
    return 0;
 }
+
+
+
+i = 0;
+while(i++ < data->nbr_philosophers)
+{
+    if (pthread_mutex_init(&data->fork_Mutex[i], NULL)!= 0)
+        ft_handle_error("Mutex ERROR");
+}
+i = 0;
+while(i++ < data->nbr_philosophers)
+{
+    if (pthread_create(&data->philo->thread[i], NULL, &routine, (void*)data) != 0)
+        ft_handle_error("THREAD ERROR");
+}
+i = 0;
+while(i++ < data->nbr_philosophers)
+{
+    if (pthread_join(data->philo->thread[i], NULL) != 0)
+        ft_handle_error("THREAD ERROR");
+}
+i = 0;
+while(i++ < data->nbr_philosophers)
+{
+    pthread_mutex_destroy(&data->fork_Mutex[i]);
+}
+
+// void	ft_philo_eat(t_philo *philo)
+// {
+// 	t_data *data;
+
+// 	data = philo->data;
+// 	pthread_mutex_lock(&data->fork_mutex[philo->left_fork]);
+// 	pthread_mutex_lock(&data->fork_mutex[philo->right_fork]);
+// 	print_state(data, philo->id, "has taken a fork\n");
+// 	print_state(data, philo->id, "has taken a fork\n");
+// 	pthread_mutex_lock(&data->eating_mutex);
+// 	print_state(data, philo->id, "is eating\n");
+// 	philo->last_eat = timestamp();
+// 	usleep(200 * 1000);
+// 	printf("eat 2: %lld\n", philo->last_eat);
+	
+// }
