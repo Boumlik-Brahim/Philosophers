@@ -18,7 +18,7 @@ void	ft_handle_error(char *str)
 	ft_putstr_fd(str, 1);
 }
 
-void	ft_empty_arg(int ac, char **av)
+int	ft_empty_arg(int ac, char **av)
 {
 	int		i;
 	char	*str;
@@ -28,13 +28,14 @@ void	ft_empty_arg(int ac, char **av)
 	{
 		str = ft_strtrim(av[i], " ");
 		if (ft_strlen(str) == 0)
-			ft_handle_error("EMPTY ARGUMENTS");
+			return (-1);
 		free(str);
 		i++;
 	}
+	return (0);
 }
 
-void	ft_check_integers(char **str)
+int	ft_check_integers(char **str)
 {
 	int	i;
 	int	j;
@@ -46,25 +47,27 @@ void	ft_check_integers(char **str)
 		if (str[i][j] == '+' || str[i][j] == '-')
 			j++;
 		if (str[i][j] == '\0')
-			ft_handle_error("SOME ARGS AREN'T INTEGERS\n");
+			return (-1);
 		while (str[i][j])
 		{
 			if (ft_isdigit(str[i][j]) == 0)
-				ft_handle_error("SOME ARGS AREN'T INTEGERS\n");
+				return (-1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
-char	**ft_join_args(int i, int ac, char **av)
+char	**ft_join_args(char **av)
 {
 	char	*res;
 	char	**str;
 	char	*ptr;
 	char	*s;
+	int		i;
 
-	ft_empty_arg(ac, av);
+	i = 0;
 	res = ft_strdup("");
 	while (av[++i])
 	{
@@ -78,6 +81,5 @@ char	**ft_join_args(int i, int ac, char **av)
 	}
 	str = ft_split(res, ' ');
 	free(res);
-	ft_check_integers(str);
 	return (str);
 }

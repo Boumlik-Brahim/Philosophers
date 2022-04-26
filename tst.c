@@ -170,6 +170,40 @@ void *car(void *arg)
 // 	t_philo philo[210];
 // }t_data;
 
+// void	ft_philo_eat(t_philo *philo)
+// {
+// 	t_data *data;
+
+// 	data = philo->data;
+// 	pthread_mutex_lock(&data->fork_mutex[philo->left_fork]);
+// 	pthread_mutex_lock(&data->fork_mutex[philo->right_fork]);
+// 	print_state(data, philo->id, "has taken a fork\n");
+// 	print_state(data, philo->id, "has taken a fork\n");
+// 	pthread_mutex_lock(&data->eating_mutex);
+// 	print_state(data, philo->id, "is eating\n");
+// 	philo->last_eat = timestamp();
+// 	usleep(200 * 1000);
+// 	printf("eat 2: %lld\n", philo->last_eat);
+	
+// }
+
+// int	ft_init_philo(t_data *data)
+// {
+// 	int i;
+
+// 	i = 1;
+// 	while (i <= data->nbr_philo)
+// 	{
+// 		data->philo[i].id = i  ;
+// 		data->philo[i].left_fork = i ;
+// 		data->philo[i].right_fork = (i % data->nbr_philo ) + 1;
+// 		data->philo[i].last_eat = 0;
+// 		data->philo[i].data = data;
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 pthread_mutex_t stoveMutex[4];
 int stoveFuel[4] = { 100, 100, 100, 100};
 
@@ -268,19 +302,11 @@ while(i++ < data->nbr_philosophers)
     pthread_mutex_destroy(&data->fork_Mutex[i]);
 }
 
-// void	ft_philo_eat(t_philo *philo)
-// {
-// 	t_data *data;
-
-// 	data = philo->data;
-// 	pthread_mutex_lock(&data->fork_mutex[philo->left_fork]);
-// 	pthread_mutex_lock(&data->fork_mutex[philo->right_fork]);
-// 	print_state(data, philo->id, "has taken a fork\n");
-// 	print_state(data, philo->id, "has taken a fork\n");
-// 	pthread_mutex_lock(&data->eating_mutex);
-// 	print_state(data, philo->id, "is eating\n");
-// 	philo->last_eat = timestamp();
-// 	usleep(200 * 1000);
-// 	printf("eat 2: %lld\n", philo->last_eat);
-	
-// }
+ int i;
+i = 0;
+while (i++ < data->nbr_philosophers)
+{
+    data->philo[i].id = i;
+    data->philo[i].right_fork = i;
+    data->philo[i].left_fork = (i % data->nbr_philosophers) + 1;
+}
