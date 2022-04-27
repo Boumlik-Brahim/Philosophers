@@ -282,3 +282,16 @@ char	**ft_split(char const *s, char c)
 	str[ft_count(s, c)] = NULL;
 	return (str);
 }
+
+void	free_data(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	while (ptr[i] != NULL)
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
+}

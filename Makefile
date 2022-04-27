@@ -7,6 +7,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = philo_mandatory/philosophers.c \
 		philo_mandatory/philo_utils.c \
 		philo_mandatory/philo_errors.c \
+		philo_mandatory/threads_manage.c \
 
 all: $(NAME)
 

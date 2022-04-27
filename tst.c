@@ -183,8 +183,7 @@ void *car(void *arg)
 // 	print_state(data, philo->id, "is eating\n");
 // 	philo->last_eat = timestamp();
 // 	usleep(200 * 1000);
-// 	printf("eat 2: %lld\n", philo->last_eat);
-	
+// 	printf("eat 2: %lld\n", philo->last_eat);	
 // }
 
 // int	ft_init_philo(t_data *data)
@@ -310,3 +309,13 @@ while (i++ < data->nbr_philosophers)
     data->philo[i].right_fork = i;
     data->philo[i].left_fork = (i % data->nbr_philosophers) + 1;
 }
+
+// void	print_state(t_data *data, int id, char *str)
+// {
+// 	pthread_mutex_lock(&data->writing_mutex);
+// 	if (data->dieded == 0)
+// 	{
+// 		printf("%lld	%d	%s",(timestamp() - data->first_time), id, str);
+// 	}
+// 	pthread_mutex_unlock(&data->writing_mutex);
+// }
