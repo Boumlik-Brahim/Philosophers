@@ -19,17 +19,17 @@
 # include <pthread.h>
 #include <time.h>
 
-#define THINK   0
-#define EAT     1
-#define SLEEP   2
-#define DIE     3
-
+#define DIE     0
+#define THINK   1
+#define EAT     2
+#define SLEEP   3
 
 typedef struct s_philo
 {
 	int             id;
     int             right_fork;
     int             left_fork;
+    int             philo_state;
     pthread_t       thread;
     pthread_mutex_t fork_Mutex;
     struct s_data  *shared_data;
@@ -52,7 +52,11 @@ int ft_empty_arg(int ac, char **av);
 int ft_check_integers(char **str);
 
 int ft_init_data(t_data *data, char **args, int ac, char **av);
-void	ft_init_philo(t_philo  *philo,t_data *data);
+void    ft_init_philo(t_philo  *philo,t_data *data);
+int ft_init_mutex(t_data  *data);
+void    *routine(void *arg);
+int ft_init_thread(t_data  *data);
+void    print_state(t_philo *philo, int philo_id, char *str);
 
 int     ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
@@ -66,6 +70,5 @@ int     ft_atoi(const char *str);
 char	**ft_split(char const *s, char c);
 
 void	free_data(char **ptr);
-
 
 #endif

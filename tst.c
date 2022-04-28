@@ -319,3 +319,40 @@ while (i++ < data->nbr_philosophers)
 // 	}
 // 	pthread_mutex_unlock(&data->writing_mutex);
 // }
+
+ printf("data.nbr_philosophers: %d\n",data.nbr_philosophers);
+printf("data.time_to_die: %d\n",data.time_to_die);
+printf("data.time_to_eat: %d\n",data.time_to_eat);
+printf("data.time_to_sleep: %d\n",data.time_to_sleep);
+printf("data.nmbroftm_each_philo_eat: %d\n",data.nmbroftm_each_philo_eat);
+printf("data.philo[i].id: %d\n",data.philo[i].id);
+printf("data.philo[i].shared_data: %d\n",data.philo[i].shared_data->nbr_philosophers);
+printf("data.philo[i].right_fork: %d\n",data.philo[i].right_fork);
+printf("data.philo[i].left_fork: %d\n",data.philo[i].left_fork);
+
+
+long long	timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
+
+long long	time_diff(long long past, long long current)
+{
+	return (current - past);
+}
+
+void		smart_sleep(long long time, t_data *data)
+{
+	long long i;
+
+	i = timestamp();
+	while (!(data->dieded))
+	{
+		if (time_diff(i, timestamp()) >= time)
+			break ;
+		usleep(50);
+	}
+}
