@@ -17,7 +17,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <pthread.h>
-#include <time.h>
+# include <time.h>
+#include <sys/time.h>
 
 #define DIE     0
 #define THINK   1
@@ -29,21 +30,26 @@ typedef struct s_philo
 	int             id;
     int             right_fork;
     int             left_fork;
-    int             philo_state;
+    long int        last_time_eat;
+    int             nmbroftm_philo_eat;   
     pthread_t       thread;
     pthread_mutex_t fork_Mutex;
-    struct s_data  *shared_data;
+    struct s_data   *shared_data;
 }   t_philo;
 
 typedef struct s_data
 {
-    int     nbr_philosophers;
-    int     time_to_die;
-    int     time_to_eat;
-    int     time_to_sleep;
-    int     nmbroftm_each_philo_eat;
+    int             nbr_philosophers;
+    int             time_to_die;
+    int             time_to_eat;
+    int             time_to_sleep;
+    int             nmbroftm_each_philo_eat;
+    int             philo_state;
+    long int        start_time;
+    int             all_philos_eat;
     pthread_mutex_t print_Mutex;
-    t_philo *philo;
+    pthread_mutex_t eat_Mutex;
+    t_philo         *philo;
 }   t_data;
 
 void	ft_handle_error(char *str);
@@ -57,6 +63,8 @@ int ft_init_mutex(t_data  *data);
 void    *routine(void *arg);
 int ft_init_thread(t_data  *data);
 void    print_state(t_philo *philo, int philo_id, char *str);
+
+long int ft_timestamp(void);
 
 int     ft_isdigit(int c);
 size_t	ft_strlen(const char *s);

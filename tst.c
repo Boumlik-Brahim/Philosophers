@@ -203,6 +203,19 @@ void *car(void *arg)
 // 	return (0);
 // }
 
+// void ft_usleep(int time, t_philo *philo)
+// {
+//     int i;
+
+// 	i = ft_timestamp();
+// 	while (philo->philo_state != DIE)
+// 	{
+// 		if ((i - ft_timestamp()) >= time)
+// 			break ;
+// 		usleep(50);
+// 	}
+// } 
+
 pthread_mutex_t stoveMutex[4];
 int stoveFuel[4] = { 100, 100, 100, 100};
 
@@ -320,7 +333,7 @@ while (i++ < data->nbr_philosophers)
 // 	pthread_mutex_unlock(&data->writing_mutex);
 // }
 
- printf("data.nbr_philosophers: %d\n",data.nbr_philosophers);
+printf("data.nbr_philosophers: %d\n",data.nbr_philosophers);
 printf("data.time_to_die: %d\n",data.time_to_die);
 printf("data.time_to_eat: %d\n",data.time_to_eat);
 printf("data.time_to_sleep: %d\n",data.time_to_sleep);
@@ -355,4 +368,31 @@ void		smart_sleep(long long time, t_data *data)
 			break ;
 		usleep(50);
 	}
+}
+
+int    ft_check_death(t_data d, t_philo ph, int i)
+{
+    while (d->all_eat == FALSE)
+    {
+        while (i < d->n_philo && d->dieded == FALSE)
+        {
+            pthread_mutex_lock(&d->eating_mutex);
+            if (ft_time_diff(ph[i].last_eat, ft_get_time()) > d->tt_die)
+            {
+                ft_print_state(d, ph[i].id, "died\n");
+                d->dieded = TRUE;
+            }
+            pthread_mutex_unlock(&d->eating_mutex);
+            usleep(100);
+            i++;
+        }
+        if (d->dieded == TRUE)
+            return (END);
+        i = 0;
+        while (d->n_eat != -1 && i < d->n_philo && ph[i].eat_cnt >= d->n_eat)
+            i++;
+        if (i == d->n_philo)
+            return (END);
+    }
+    return (PHTREAD_ERR);
 }

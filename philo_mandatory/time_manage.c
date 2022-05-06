@@ -12,4 +12,10 @@
 
 #include "philosophers.h"
 
+long int ft_timestamp(void)
+{
+    struct  timeval time;
 
+    gettimeofday(&time, NULL);  
+    return((time.tv_sec * 1000000 + time.tv_usec) / 1000);
+}
