@@ -21,15 +21,10 @@
 #include <sys/time.h>
 
 #define DIE     0
-#define THINK   1
-#define EAT     2
-#define SLEEP   3
 
 typedef struct s_philo
 {
 	int             id;
-    int             right_fork;
-    int             left_fork;
     long int        last_time_eat;
     int             nmbroftm_philo_eat;   
     pthread_t       thread;
@@ -62,9 +57,11 @@ void    ft_init_philo(t_philo  *philo,t_data *data);
 int ft_init_mutex(t_data  *data);
 void    *routine(void *arg);
 int ft_init_thread(t_data  *data);
-void    print_state(t_philo *philo, int philo_id, char *str);
+void    print_state(t_data  *data, int philo_id, char *str);
+int ft_chk_deth(t_philo *philo,t_data *data);
 
 long int ft_timestamp(void);
+void ft_precis_usleep(t_philo *philo, long int sleep_time);
 
 int     ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
