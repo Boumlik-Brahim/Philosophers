@@ -12,43 +12,6 @@
 
 #include "philosophers.h"
 
-int ft_chk_deth(t_philo *philo,t_data *data)
-{
-    while (philo->shared_data->philo_state != DIE)
-    {
-        if (ft_timestamp() - philo->last_time_eat > data->time_to_die)
-        {
-            print_state(data, philo->id + 1 ,"died\n");
-            data->philo_state = DIE;
-            return (-1);
-        }
-        else if (data->all_philos_eat == data->nbr_philosophers)
-        {
-            data->philo_state = DIE;
-            return (-1);
-        }
-        printf("nmbroftm_philo_eat  %d\n",philo->nmbroftm_philo_eat);
-        printf("all_philos_eat  %d\n",data->all_philos_eat);
-    }
-    return (0);
-}
-
-void ft_eat(t_philo *philo, t_data *data)
-{
-    pthread_mutex_lock(&philo[philo->id].fork_Mutex);
-    print_state(data, philo->id + 1 , "has taken a fork\n");
-    pthread_mutex_lock(&data->philo[(philo->id + 1) % data->nbr_philosophers].fork_Mutex);
-    print_state(data, philo->id + 1, "has taken a fork\n");
-    print_state(data, philo->id + 1, "is eating\n");
-    philo->last_time_eat = ft_timestamp();
-    philo->nmbroftm_philo_eat++;
-    ft_precis_usleep(philo, data->time_to_eat);
-    pthread_mutex_unlock(&data->philo[(philo->id + 1) % data->nbr_philosophers].fork_Mutex);
-    print_state(data, philo->id + 1, "put left fork\n");  
-    pthread_mutex_unlock(&philo[philo->id].fork_Mutex);
-    print_state(data, philo->id + 1, "put right fork\n");
-}
-
 void *routine(void *arg)
 {
     t_philo *philo;
@@ -86,9 +49,12 @@ int main(int ac, char **av)
         return (ft_handle_error("MUTEX ERROR"), -1);
     if (ft_init_thread(&data) == -1)
         return (ft_handle_error("THREAD ERROR"), -1);
-    if(ft_chk_deth(data.philo,&data) == -1)
-        return(0);
+    ft_chk_deth(data.philo,&data);
+    while (1)
+    {
+        if(data.philo_state == DIE)
+            break;
+    }
     free_data(args);
-    while (1){}
-    return (0);    
+    return (0);     
 }

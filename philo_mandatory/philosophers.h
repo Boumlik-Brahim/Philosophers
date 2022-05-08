@@ -58,7 +58,8 @@ int ft_init_mutex(t_data  *data);
 void    *routine(void *arg);
 int ft_init_thread(t_data  *data);
 void    print_state(t_data  *data, int philo_id, char *str);
-int ft_chk_deth(t_philo *philo,t_data *data);
+void ft_chk_deth(t_philo *philo,t_data *data);
+void ft_eat(t_philo *philo, t_data *data);
 
 long int ft_timestamp(void);
 void ft_precis_usleep(t_philo *philo, long int sleep_time);
