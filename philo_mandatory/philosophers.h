@@ -43,9 +43,22 @@ typedef struct s_data
     long int        start_time;
     int             all_philos_eat;
     pthread_mutex_t print_Mutex;
-    pthread_mutex_t eat_Mutex;
     t_philo         *philo;
 }   t_data;
+
+int     ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+void    ft_putstr_fd(char *s, int fd);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char	*ft_strdup(const char *s1);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strjoin(char const *s1, char const *s2);
+
+int     ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
 
 void	ft_handle_error(char *str);
 char	**ft_join_args(char **av);
@@ -53,28 +66,17 @@ int ft_empty_arg(int ac, char **av);
 int ft_check_integers(char **str);
 
 int ft_init_data(t_data *data, char **args, int ac, char **av);
-void    ft_init_philo(t_philo  *philo,t_data *data);
 int ft_init_mutex(t_data  *data);
-void    *routine(void *arg);
 int ft_init_thread(t_data  *data);
-void    print_state(t_data  *data, int philo_id, char *str);
+
+void    ft_print_state(t_data  *data, int philo_id, char *str);
 void ft_chk_deth(t_philo *philo,t_data *data);
 void ft_eat(t_philo *philo, t_data *data);
+void	free_data(char **ptr);
 
 long int ft_timestamp(void);
 void ft_precis_usleep(t_philo *philo, long int sleep_time);
 
-int     ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-void    ft_putstr_fd(char *s, int fd);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_strjoin(char const *s1, char const *s2);
-int     ft_atoi(const char *str);
-char	**ft_split(char const *s, char c);
-
-void	free_data(char **ptr);
+void    *ft_routine(void *arg);
 
 #endif

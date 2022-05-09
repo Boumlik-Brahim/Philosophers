@@ -4,11 +4,18 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = philo_mandatory/philosophers.c \
-		philo_mandatory/philo_utils.c \
+SRC = philo_mandatory/philo_utils/ft_atoi.c \
+		philo_mandatory/philo_utils/ft_split.c \
+		philo_mandatory/philo_utils/ft_strjoin.c \
+		philo_mandatory/philo_utils/ft_substr.c \
+		philo_mandatory/philo_utils/funct_utils.c \
+		philo_mandatory/philo.c \
+		philo_mandatory/philo_init.c \
 		philo_mandatory/philo_errors.c \
-		philo_mandatory/threads_manage.c \
+		philo_mandatory/philo_manage.c \
 		philo_mandatory/time_manage.c \
+		philo_mandatory/philo_routine.c \
+
 
 all: $(NAME)
 
