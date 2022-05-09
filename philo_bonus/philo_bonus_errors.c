@@ -6,11 +6,11 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:38:30 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/09 13:49:33 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/04/16 02:38:32 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	ft_handle_error(char *str)
 {

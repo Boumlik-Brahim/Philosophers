@@ -17,6 +17,7 @@
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
-    "philosophers.h": "c"
+    "philosophers.h": "c",
+    "philosophers_bonus.h": "c"
   }
 }
