@@ -16,9 +16,10 @@ void	ft_handle_error(char *str)
 {
 	ft_putstr_fd("\033[0;31m\e[1mError\033[0m\n", 1);
 	ft_putstr_fd(str, 1);
+	exit (0);
 }
 
-int	ft_empty_arg(int ac, char **av)
+void	ft_empty_arg(int ac, char **av)
 {
 	int		i;
 	char	*str;
@@ -28,14 +29,13 @@ int	ft_empty_arg(int ac, char **av)
 	{
 		str = ft_strtrim(av[i], " ");
 		if (ft_strlen(str) == 0)
-			return (-1);
+			ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
 		free(str);
 		i++;
 	}
-	return (0);
 }
 
-int	ft_check_integers(char **str)
+void	ft_check_integers(char **str)
 {
 	int	i;
 	int	j;
@@ -47,16 +47,15 @@ int	ft_check_integers(char **str)
 		if (str[i][j] == '+' || str[i][j] == '-')
 			j++;
 		if (str[i][j] == '\0')
-			return (-1);
+			ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
 		while (str[i][j])
 		{
 			if (ft_isdigit(str[i][j]) == 0)
-				return (-1);
+				ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }
 
 char	**ft_join_args(char **av)

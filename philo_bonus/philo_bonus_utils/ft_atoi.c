@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philosophers_bonus.h"
 
 static int	ft_is_space(char c)
 {

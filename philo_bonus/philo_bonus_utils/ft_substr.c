@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philosophers_bonus.h"
 
 char	*ft_strdup(const char *s1)
 {

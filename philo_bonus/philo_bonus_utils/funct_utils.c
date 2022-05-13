@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h"
+#include "../philosophers_bonus.h"
 
 int	ft_isdigit(int c)
 {
