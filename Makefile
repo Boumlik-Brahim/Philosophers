@@ -18,11 +18,11 @@ SRC = philo_mandatory/philo_utils/ft_atoi.c \
 		philo_mandatory/time_manage.c \
 		philo_mandatory/philo_routine.c \
 
-SRC_BONUS = philo_bonus/philo_bonus_utils/ft_atoi.c \
-		philo_bonus/philo_bonus_utils/ft_split.c \
-		philo_bonus/philo_bonus_utils/ft_strjoin.c \
-		philo_bonus/philo_bonus_utils/ft_substr.c \
-		philo_bonus/philo_bonus_utils/funct_utils.c \
+SRC_BONUS = philo_bonus/philo_bonus_utils/ft_atoi_bonus.c \
+		philo_bonus/philo_bonus_utils/ft_split_bonus.c \
+		philo_bonus/philo_bonus_utils/ft_strjoin_bonus.c \
+		philo_bonus/philo_bonus_utils/ft_substr_bonus.c \
+		philo_bonus/philo_bonus_utils/funct_utils_bonus.c \
 		philo_bonus/philo_bonus.c \
 		philo_bonus/philo_bonus_init.c \
 		philo_bonus/philo_bonus_routine.c \

@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:38:30 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/04/16 02:38:32 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 12:26:42 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_empty_arg(int ac, char **av)
 	{
 		str = ft_strtrim(av[i], " ");
 		if (ft_strlen(str) == 0)
-			ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
+			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 		free(str);
 		i++;
 	}
@@ -47,11 +47,11 @@ void	ft_check_integers(char **str)
 		if (str[i][j] == '+' || str[i][j] == '-')
 			j++;
 		if (str[i][j] == '\0')
-			ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
+			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 		while (str[i][j])
 		{
 			if (ft_isdigit(str[i][j]) == 0)
-				ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
+				ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 			j++;
 		}
 		i++;
@@ -71,7 +71,7 @@ char	**ft_join_args(char **av)
 	while (av[++i])
 	{
 		if (av[i][0] == '\0')
-			ft_handle_error("SOME ARGS AREN'T INTEGERS\n");
+			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 		s = ft_strjoin(av[i], " ");
 		ptr = res;
 		res = ft_strjoin(res, s);

@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:21:31 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/09 11:21:33 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 12:46:52 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_data(char **ptr)
 	free(ptr);
 }
 
-void	ft_init_data(t_datab	*data, char	**args, int	ac, char	**av)
+void	ft_init_data(t_datab *data, char **args, int ac, char **av)
 {
 	ft_empty_arg(ac, av);
 	ft_check_integers(args);
@@ -36,13 +36,14 @@ void	ft_init_data(t_datab	*data, char	**args, int	ac, char	**av)
 	data->time_to_sleep = ft_atoi(args[3]);
 	data->philo_state = 1;
 	data->all_philos_eat = 0;
-	if (data->nbr_philosophers <= 0 || data->time_to_die <= 0 || data->time_to_eat <= 0 || data->time_to_sleep <= 0)
-		ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
+	if (data->nbr_philosophers <= 0 || data->time_to_die <= 0
+		|| data->time_to_eat <= 0 || data->time_to_sleep <= 0)
+		ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 	if (ac == 6)
 	{
 		data->nmbroftm_each_philo_eat = ft_atoi(args[4]);
 		if (data->nmbroftm_each_philo_eat < 0)
-			ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
+			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 	}
 	data->philo.id = 0;
 	data->philo.nmbroftm_philo_eat = 0;
