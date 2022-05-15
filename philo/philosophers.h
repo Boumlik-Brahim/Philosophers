@@ -64,11 +64,11 @@ int			ft_init_data(t_data *data, char **args, int ac, char **av);
 int			ft_init_mutex(t_data *data);
 int			ft_init_thread(t_data *data);
 void		ft_print_state(t_data *data, int philo_id, char *str);
-void		ft_chk_deth(t_philo *philo, t_data *data);
 void		ft_eat(t_philo *philo, t_data *data);
-void		free_data(char **ptr);
+void		ft_chk_deth(t_philo *philo, t_data *data);
 long int	ft_timestamp(void);
 void		ft_precis_usleep(t_philo *philo, long int sleep_time);
 void		*ft_routine(void *arg);
+void		free_data(char **ptr);
 
 #endif

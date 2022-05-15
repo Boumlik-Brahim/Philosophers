@@ -74,8 +74,6 @@ void	ft_init_process(t_datab *data)
 
 void	ft_semaphore_open(t_datab *data)
 {
-	if (data->nbr_philosophers > SEM_VALUE_MAX)
-		ft_handle_error("NUMBER OF SEMAPHORES IS MORE THAN SEM_VALUE_MAX\n");
 	sem_unlink("fork_semaphore");
 	sem_unlink("print_semaphore");
 	data->fork_semaphore = sem_open("fork_semaphore",

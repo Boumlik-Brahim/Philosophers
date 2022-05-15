@@ -43,7 +43,7 @@ int	ft_init_data(t_data	*data, char	**args, int ac, char **av)
 	if (ac == 6)
 	{
 		data->nmbroftm_each_philo_eat = ft_atoi(args[4]);
-		if (data->nmbroftm_each_philo_eat < 0)
+		if (data->nmbroftm_each_philo_eat <= 0)
 			return (-1);
 	}
 	data->philo = (t_philo *)malloc(sizeof(t_philo) * data->nbr_philosophers);
