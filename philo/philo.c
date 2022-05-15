@@ -27,11 +27,6 @@ int	main(int ac, char **av)
 	if (ft_init_thread(&data) == -1)
 		return (ft_handle_error("THREAD ERROR"), -1);
 	ft_chk_deth(data.philo, &data);
-	while (1)
-	{
-		if (data.philo_state == DIE)
-			break ;
-	}
 	ft_destroy(&data);
 	return (0);
 }

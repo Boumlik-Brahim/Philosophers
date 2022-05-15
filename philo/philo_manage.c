@@ -23,16 +23,18 @@ void	ft_print_state(t_data	*data, int philo_id, char	*str)
 
 void	ft_chk_deth(t_philo	*philo, t_data	*data)
 {
-	while (philo->shared_data->philo_state != DIE)
+	while (data->philo_state != DIE)
 	{
 		if (ft_timestamp() - philo->last_time_eat > data->time_to_die)
 		{
-			ft_print_state(data, philo->id + 1, "died\n");
 			data->philo_state = DIE;
+			pthread_mutex_lock(&data->print_mutex);
+			printf("%ldms  %d  died\n",
+				(ft_timestamp() - data->start_time), data->philo->id + 1);
 		}
 		else if (data->all_philos_eat == data->nbr_philosophers)
 			data->philo_state = DIE;
-		usleep(100);
+		usleep(500);
 	}
 }
 

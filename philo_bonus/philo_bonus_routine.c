@@ -23,7 +23,7 @@ void	*ft_chk_deth(void *arg)
 		{
 			data->philo_state = DIE;
 			sem_wait(data->print_semaphore);
-			printf("%ldms  %d  has died\n",
+			printf("%ldms  %d  died\n",
 				(ft_timestamp() - data->start_time), data->philo.id + 1);
 			exit (1);
 		}
@@ -63,6 +63,8 @@ void	*ft_routine(t_datab *data)
 	if (pthread_create(&data->thread, NULL, &ft_chk_deth, (void *)data) != 0)
 		ft_handle_error("THREAD ERROR");
 	pthread_detach(data->thread);
+	if (data->philo.id % 2)
+		usleep(100);
 	while (1)
 	{
 		ft_eat(data);
