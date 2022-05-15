@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 02:38:30 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/15 12:26:42 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:36:04 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,20 @@ void	ft_empty_arg(int ac, char **av)
 	}
 }
 
-void	ft_check_integers(char **str)
+void	ft_check_integers(char **argv, int argc)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (str[i])
+	while (++i < argc)
 	{
 		j = 0;
-		if (str[i][j] == '+' || str[i][j] == '-')
-			j++;
-		if (str[i][j] == '\0')
-			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
-		while (str[i][j])
+		while (argv[i][j])
 		{
-			if (ft_isdigit(str[i][j]) == 0)
+			if (ft_isdigit(argv[i][j]) == 0)
 				ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 			j++;
 		}
-		i++;
 	}
-}
-
-char	**ft_join_args(char **av)
-{
-	char	*res;
-	char	**str;
-	char	*ptr;
-	char	*s;
-	int		i;
-
-	i = 0;
-	res = ft_strdup("");
-	while (av[++i])
-	{
-		if (av[i][0] == '\0')
-			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
-		s = ft_strjoin(av[i], " ");
-		ptr = res;
-		res = ft_strjoin(res, s);
-		free(ptr);
-		free(s);
-	}
-	str = ft_split(res, ' ');
-	free(res);
-	return (str);
 }

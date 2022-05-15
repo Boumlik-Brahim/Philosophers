@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:14:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/15 12:33:29 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:38:31 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,7 @@ void	ft_exit(t_datab *data)
 			}
 		}
 	}
-	sem_unlink("fork_semaphore");
-	sem_close(data->fork_semaphore);
-	sem_unlink("print_semaphore");
-	sem_close(data->print_semaphore);
-	exit (0);
+	ft_unlink(data);
 }
 
 void	ft_init_process(t_datab *data)

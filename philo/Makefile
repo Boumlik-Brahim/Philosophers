@@ -5,8 +5,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = philo_utils/ft_atoi.c \
-	philo_utils/ft_split.c \
-	philo_utils/ft_strjoin.c \
+	philo_utils/ft_strtrim.c \
 	philo_utils/ft_substr.c \
 	philo_utils/funct_utils.c \
 	philo.c \

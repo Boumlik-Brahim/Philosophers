@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 01:14:58 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/09 13:56:16 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:33:47 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void	ft_eat(t_philo	*philo, t_data	*data)
 	pthread_mutex_unlock(&data->philo[philo->id].fork_mutex);
 }
 
-void	free_data(char **ptr)
+void	ft_destroy(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (ptr[i] != NULL)
+	while (i < data->nbr_philosophers)
 	{
-		free(ptr[i]);
+		pthread_mutex_destroy(&data->philo[i].fork_mutex);
 		i++;
 	}
-	free(ptr);
+	free(data->philo);
 }

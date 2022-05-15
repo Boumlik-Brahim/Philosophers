@@ -6,7 +6,7 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:21:31 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/09 13:42:47 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:33:06 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static void	ft_init_philo(t_philo	*philo, t_data	*data)
 	}
 }
 
-int	ft_init_data(t_data	*data, char	**args, int ac, char **av)
+int	ft_init_data(t_data	*data, int ac, char **av)
 {
-	if (ft_empty_arg(ac, av) == -1 || ft_check_integers(args) == -1)
+	if (ft_empty_arg(ac, av) == -1 || ft_check_integers(av, ac) == -1)
 		return (-1);
 	data->start_time = ft_timestamp();
-	data->nbr_philosophers = ft_atoi(args[0]);
-	data->time_to_die = ft_atoi(args[1]);
-	data->time_to_eat = ft_atoi(args[2]);
-	data->time_to_sleep = ft_atoi(args[3]);
+	data->nbr_philosophers = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	data->philo_state = 1;
 	data->all_philos_eat = 0;
 	if (data->nbr_philosophers <= 0 || data->time_to_die <= 0
@@ -42,7 +42,7 @@ int	ft_init_data(t_data	*data, char	**args, int ac, char **av)
 		return (-1);
 	if (ac == 6)
 	{
-		data->nmbroftm_each_philo_eat = ft_atoi(args[4]);
+		data->nmbroftm_each_philo_eat = ft_atoi(av[5]);
 		if (data->nmbroftm_each_philo_eat <= 0)
 			return (-1);
 	}

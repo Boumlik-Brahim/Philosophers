@@ -5,8 +5,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_BONUS = philo_bonus_utils/ft_atoi_bonus.c \
-		philo_bonus_utils/ft_split_bonus.c \
-		philo_bonus_utils/ft_strjoin_bonus.c \
+		philo_bonus_utils/ft_strtrim_bonus.c \
 		philo_bonus_utils/ft_substr_bonus.c \
 		philo_bonus_utils/funct_utils_bonus.c \
 		philo_bonus.c \

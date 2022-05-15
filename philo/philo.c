@@ -15,14 +15,12 @@
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	**args;
 
 	if (ac == 2 && (!ft_strncmp(av[1], "-h", 2)))
 		return (ft_putstr_fd("./philo ar1 ar2 ar3 ar4 [ar5[opt]]\n", 1), 0);
 	else if (ac != 5 && ac != 6)
 		return (ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n"), -1);
-	args = ft_join_args(av);
-	if (ft_init_data(&data, args, ac, av) == -1)
+	if (ft_init_data(&data, ac, av) == -1)
 		return (ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n"), -1);
 	if (ft_init_mutex(&data) == -1)
 		return (ft_handle_error("MUTEX ERROR"), -1);
@@ -34,6 +32,6 @@ int	main(int ac, char **av)
 		if (data.philo_state == DIE)
 			break ;
 	}
-	free_data(args);
+	ft_destroy(&data);
 	return (0);
 }

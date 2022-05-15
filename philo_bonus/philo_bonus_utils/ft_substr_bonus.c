@@ -12,7 +12,7 @@
 
 #include "../philosophers_bonus.h"
 
-char	*ft_strdup(const char *s1)
+static char	*ft_strdup(const char *s1)
 {
 	char	*str;
 	int		l;

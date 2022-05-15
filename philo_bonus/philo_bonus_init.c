@@ -6,34 +6,31 @@
 /*   By: bbrahim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:21:31 by bbrahim           #+#    #+#             */
-/*   Updated: 2022/05/15 12:46:52 by bbrahim          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:46:34 by bbrahim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void	free_data(char **ptr)
+void	ft_unlink(t_datab *data)
 {
-	int	i;
-
-	i = 0;
-	while (ptr[i] != NULL)
-	{
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
+	sem_unlink("fork_semaphore");
+	sem_close(data->fork_semaphore);
+	sem_unlink("print_semaphore");
+	sem_close(data->print_semaphore);
+	free(data->philo.pid);
+	exit (0);
 }
 
-void	ft_init_data(t_datab *data, char **args, int ac, char **av)
+void	ft_init_data(t_datab *data, int ac, char **av)
 {
 	ft_empty_arg(ac, av);
-	ft_check_integers(args);
+	ft_check_integers(av, ac);
 	data->start_time = ft_timestamp();
-	data->nbr_philosophers = ft_atoi(args[0]);
-	data->time_to_die = ft_atoi(args[1]);
-	data->time_to_eat = ft_atoi(args[2]);
-	data->time_to_sleep = ft_atoi(args[3]);
+	data->nbr_philosophers = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	data->philo_state = 1;
 	data->all_philos_eat = 0;
 	if (data->nbr_philosophers <= 0 || data->time_to_die <= 0
@@ -41,7 +38,7 @@ void	ft_init_data(t_datab *data, char **args, int ac, char **av)
 		ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 	if (ac == 6)
 	{
-		data->nmbroftm_each_philo_eat = ft_atoi(args[4]);
+		data->nmbroftm_each_philo_eat = ft_atoi(av[5]);
 		if (data->nmbroftm_each_philo_eat < 0)
 			ft_handle_error("INVALID ARGS TRY \"-h\" FOR MORE INF.\n");
 	}
