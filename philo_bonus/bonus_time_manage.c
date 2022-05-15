@@ -20,12 +20,12 @@ long int ft_timestamp(void)
     return((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void ft_precis_usleep(t_philob *philo, long int sleep_time)
+void ft_precis_usleep(long int sleep_time)
 {
     long int time;
 
     time = ft_timestamp();
-    while (philo->shared_data->philo_state != DIE)
+    while (1)
     {
         if (ft_timestamp() - time >= sleep_time)
             break ;

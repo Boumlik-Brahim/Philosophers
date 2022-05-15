@@ -23,12 +23,6 @@ int main(int ac, char **av)
         ft_handle_error("INVALID ARGS TRY \"--help or -h\" FOR MORE INFORMATIONS.\n");
     args = ft_join_args(av);
     ft_init_data(&data, args, ac, av);
-    // ft_chk_deth(data.philo,&data);
-    // while (1)
-    // {
-    //     if(data.philo_state == DIE)
-    //         break;
-    // }
     free_data(args);
     return (0);     
 }
