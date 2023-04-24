@@ -54,4 +54,3 @@ This project is an introduction to multi-threads/multi-process programming with 
     - Named Semaphores are like process-shared semaphores, except that named semaphores are referenced with a pathname rather than a shared value. Named semaphores are sharable by several processes. Named semaphores have an owner user-id, group-id, and a protection mode.
 
     Unnamed Semaphores are allocated in process memory and initialized. Unnamed semaphores might be usable by more than one process, depending on how the semaphore is allocated and initialized. Unnamed semaphores are either private, inherited through fork(), or are protected by access protections of the regular file in which they are allocated and mapped.
-    
